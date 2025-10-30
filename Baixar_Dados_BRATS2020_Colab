@@ -1,6 +1,6 @@
 !pip install kaggle nibabel > /dev/null
 
-# Célula 1: Instalação e importações básicas
+# Instalação e importações básicas
 import os
 import zipfile
 from google.colab import files
@@ -8,7 +8,7 @@ import glob
 
 print("=== CONFIGURAÇÃO PARA BAIXAR BRATS 2020 ===")
 
-# Célula 2: Configurar API do Kaggle
+# Configurar API do Kaggle
 print("1. Vá para https://www.kaggle.com/")
 print("2. Faça login na sua conta")
 print("3. Clique no seu perfil → Settings")
@@ -25,7 +25,7 @@ uploaded = files.upload()
 
 print("✅ Kaggle configurado com sucesso!")
 
-# Célula 3: Download do dataset BraTS 2020
+# Download do dataset BraTS 2020
 print("=== INICIANDO DOWNLOAD DO BRATS 2020 ===")
 print("Isso pode levar vários minutos...")
 
@@ -34,7 +34,7 @@ print("Isso pode levar vários minutos...")
 
 print("✅ Download completo!")
 
-# Célula 4: Extrair arquivos
+# Extrair arquivos
 print("=== EXTRAINDO ARQUIVOS ===")
 
 with zipfile.ZipFile('brats20-dataset-training-validation.zip', 'r') as zip_ref:
@@ -42,7 +42,7 @@ with zipfile.ZipFile('brats20-dataset-training-validation.zip', 'r') as zip_ref:
 
 print("✅ Arquivos extraídos!")
 
-# Célula 5: Verificar estrutura dos dados
+# Verificar estrutura dos dados
 print("=== ESTRUTURA DOS DADOS ===")
 
 def explorar_estrutura():
@@ -78,7 +78,7 @@ def explorar_estrutura():
 
 explorar_estrutura()
 
-# Célula 6: Verificar tamanho dos dados
+# Verificar tamanho dos dados
 print("=== INFORMAÇÕES DE TAMANHO ===")
 
 def calcular_tamanho():
@@ -93,7 +93,3 @@ def calcular_tamanho():
     print(f"Tamanho total do dataset: {total_gb:.2f} GB")
 
 calcular_tamanho()
-
-
-
-
