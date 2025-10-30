@@ -1,0 +1,99 @@
+!pip install kaggle nibabel > /dev/null
+
+# Célula 1: Instalação e importações básicas
+import os
+import zipfile
+from google.colab import files
+import glob
+
+print("=== CONFIGURAÇÃO PARA BAIXAR BRATS 2020 ===")
+
+# Célula 2: Configurar API do Kaggle
+print("1. Vá para https://www.kaggle.com/")
+print("2. Faça login na sua conta")
+print("3. Clique no seu perfil → Settings")
+print("4. Vá em API → Create New API Token")
+print("5. Faça upload do arquivo kaggle.json abaixo:")
+
+# Upload do kaggle.json
+uploaded = files.upload()
+
+# Mover para o local correto
+!mkdir -p ~/.kaggle
+!mv kaggle.json ~/.kaggle/
+!chmod 600 ~/.kaggle/kaggle.json
+
+print("✅ Kaggle configurado com sucesso!")
+
+# Célula 3: Download do dataset BraTS 2020
+print("=== INICIANDO DOWNLOAD DO BRATS 2020 ===")
+print("Isso pode levar vários minutos...")
+
+# Download do dataset
+!kaggle datasets download -d awsaf49/brats20-dataset-training-validation
+
+print("✅ Download completo!")
+
+# Célula 4: Extrair arquivos
+print("=== EXTRAINDO ARQUIVOS ===")
+
+with zipfile.ZipFile('brats20-dataset-training-validation.zip', 'r') as zip_ref:
+    zip_ref.extractall('/content/brats2020/')
+
+print("✅ Arquivos extraídos!")
+
+# Célula 5: Verificar estrutura dos dados
+print("=== ESTRUTURA DOS DADOS ===")
+
+def explorar_estrutura():
+    base_dir = '/content/brats2020'
+
+    # Verificar se os diretórios principais existem
+    train_dir = os.path.join(base_dir, 'Training')
+    val_dir = os.path.join(base_dir, 'Validation')
+
+    print(f"Diretório base: {base_dir}")
+    print(f"Training existe: {os.path.exists(train_dir)}")
+    print(f"Validation existe: {os.path.exists(val_dir)}")
+
+    if os.path.exists(train_dir):
+        # Contar casos de treino
+        train_cases = glob.glob(f"{train_dir}/BraTS20_Training_*")
+        print(f"Número de casos de treino: {len(train_cases)}")
+
+        # Mostrar primeiro caso
+        if train_cases:
+            sample_case = train_cases[0]
+            print(f"\n📁 Caso exemplo: {os.path.basename(sample_case)}")
+
+            # Listar arquivos do caso
+            files = os.listdir(sample_case)
+            for file in files:
+                print(f"   📄 {file}")
+
+    if os.path.exists(val_dir):
+        # Contar casos de validação
+        val_cases = glob.glob(f"{val_dir}/BraTS20_Validation_*")
+        print(f"\nNúmero de casos de validação: {len(val_cases)}")
+
+explorar_estrutura()
+
+# Célula 6: Verificar tamanho dos dados
+print("=== INFORMAÇÕES DE TAMANHO ===")
+
+def calcular_tamanho():
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk('/content/brats2020'):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            total_size += os.path.getsize(fp)
+
+    # Converter para GB
+    total_gb = total_size / (1024**3)
+    print(f"Tamanho total do dataset: {total_gb:.2f} GB")
+
+calcular_tamanho()
+
+
+
+
