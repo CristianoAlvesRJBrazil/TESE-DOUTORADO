@@ -1,4 +1,4 @@
-# Célula 1: Explorar a estrutura real dos dados
+# Explorar a estrutura real dos dados
 print("=== EXPLORANDO ESTRUTURA DOS DADOS ===")
 
 import os
@@ -39,7 +39,7 @@ def explorar_estrutura():
 
 base_dir = explorar_estrutura()
 
-# Método 2: Busca automática por qualquer arquivo .nii.gz
+# Método: Busca automática por qualquer arquivo .nii.gz
 print("\n=== MÉTODO 2: BUSCA AUTOMÁTICA ===")
 
 def busca_automatica():
@@ -89,6 +89,6 @@ def busca_automatica():
         print("❌ Nenhum arquivo FLAIR encontrado!")
         return None
 
-# Executar método 2
+# Executar método
 imagem_exemplo = busca_automatica()
 
