@@ -1,0 +1,9 @@
+import shutil
+
+# Supondo que você tenha um diretório chamado "minha_pasta".
+diretorio_para_remover = '/content/brats2020'
+
+# Remove o diretório e todo o seu conteúdo.
+shutil.rmtree(diretorio_para_remover)
+
+print(f"O diretório '{diretorio_para_remover}' foi removido.")
